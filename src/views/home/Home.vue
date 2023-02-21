@@ -8,8 +8,8 @@
         </div>
 
         <div class="location">
-            <div class="city">晋中</div>
-            <div class="myPosition">
+            <div class="city" @click="selectCity">晋中</div>
+            <div class="myPosition" @click="getPosition">
                 <span class="text">我的位置</span>
                 <div class="icon">
                     <icon name="aixin" size="18"></icon>
@@ -20,6 +20,21 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+const router = useRouter()
+// 选择旅行城市
+const selectCity = ()=>{
+    router.push('/city')
+}
+
+// 获取当前位置
+const getPosition = ()=>{
+    navigator.geolocation.getCurrentPosition(res=>{
+        console.log("获取成功",res);
+    },err=>{
+        console.log("获取失败",err);
+    })
+}
 
 </script>
 
@@ -52,12 +67,15 @@
 
         .city {
             flex: 1;
+            font-size: 1.5rem;
+            color: rgb(157, 155, 155);
         }
         .myPosition {
             width: 74px;
             display: flex;
             align-items: center;
             .text {
+                color: #666;
                 font-size: 1.2rem;
             }
             .icon {

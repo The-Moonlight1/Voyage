@@ -4,4 +4,10 @@
 html {
     font-size: 10px;
 }
-
+.top-page {
+    position:relative;
+    z-index:9;
+    height:100vh;
+    background-color: #fff;
+    overflow-y:auto;
+}
