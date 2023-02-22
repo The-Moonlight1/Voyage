@@ -1,9 +1,13 @@
 :root{
     --primary-color: #00cc6a;
+    --van-search-left-icon-color : #4fc08d !important;
 }
 html {
     font-size: 10px;
 }
+/*
+    个别组件的显示与隐藏使用
+*/
 .top-page {
     position:relative;
     z-index:9;
@@ -11,3 +15,4 @@ html {
     background-color: #fff;
     overflow-y:auto;
 }
+

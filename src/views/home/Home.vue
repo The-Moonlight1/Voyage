@@ -19,8 +19,9 @@
     </div>
 </template>
 
-<script setup>
+<script setup> 
 import { useRouter } from 'vue-router'
+
 const router = useRouter()
 // 选择旅行城市
 const selectCity = ()=>{

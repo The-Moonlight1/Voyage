@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const instance = axios.create({
     // 配置项目基本地址 
-    baseURL: '',
+    baseURL: 'http://123.207.32.32:1888/api',
     // 配置项目延迟时间 2.5s
     timeout: 2500
 })

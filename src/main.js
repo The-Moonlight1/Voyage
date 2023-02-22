@@ -16,8 +16,10 @@ import "./assets/icon/iconfont";
 import icon from '@/components/icon.vue'
 
 
+
+
 // 导入 axois
-import api from './http/api'
+import api from './api/api'
 
 const app = createApp(App)
 // 注册全局组件
