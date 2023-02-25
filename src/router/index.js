@@ -1,7 +1,5 @@
 import { createRouter,createWebHashHistory } from 'vue-router'
-import { shallowRef } from 'vue'
 import Home from '../views/home/Home.vue'
-import City from '../views/city/City.vue'
 const router = createRouter({
     history:createWebHashHistory(),
     //映射关系
@@ -49,6 +47,18 @@ const router = createRouter({
             path:'/detail/:id',
             name :'detail',
             component:()=>import("@/views/detail/Detail.vue")
+        },
+        {
+            path:'/404',
+            name:'404',
+            component:()=>import("@/views/notFound/NotFound.vue"),
+            meta:{
+                hideTabBar: true
+            }
+        },
+        {
+            path:'/:catchAll(.*)',
+            redirect:'/404'
         }
     ]  
 })
