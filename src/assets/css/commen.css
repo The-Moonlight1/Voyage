@@ -1,12 +1,22 @@
 :root{
-    --primary-color: #00cc6a;
-    --van-search-left-icon-color : #4fc08d !important;
+    /* 主色调 */
+    --primary-color: #05c468;
+    /* 搜索框左侧图标颜色 */
+    --van-search-left-icon-color : var(--primary-color) !important;
+    /* 提示框背景色 */
+    --van-toast-background:var(--primary-color)!important;
+    /* 线色 */
+    --line-color: #faf8f9;
+    --theme-color:var(--primary-color)
+    --theme-linear-gradient: linear-gradient(90deg, #05c468, #2197fe);
+    --van-primary-color:var(--primary-color)
 }
 html {
     font-size: 10px;
 }
 /*
     个别组件的显示与隐藏使用
+    通过样式，让有些页面不显示某些组件 (原理是覆盖掉tabbar组件)
 */
 .top-page {
     position:relative;
@@ -16,3 +26,6 @@ html {
     overflow-y:auto;
 }
 
+.bottom-gray-line {
+    border-bottom: 1px solid var(--line-color);
+  }

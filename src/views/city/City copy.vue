@@ -16,10 +16,8 @@
         </div>
 
         <div class="content">
-            <keep-alive>
-                <component v-show="curTab" :is='curTab'></component>
-            </keep-alive>
-        </div> 
+            <component v-if="curTab" :is='curTab'></component>
+        </div>
     </div>
 </template>
 
@@ -44,8 +42,12 @@
     let curTab = shallowRef(Domestic);
 
     // 网络请求, 获取所有城市
-    const cityStore = useCityStore()
-    cityStore.fetchAllCitiesData()
+    // const cityStore = useCityStore()
+    // cityStore.fetchAllCitiesData()
+    onBeforeMount(()=>{
+        const cityStore = useCityStore()
+        cityStore.fetchAllCitiesData()
+    })
 </script>
 
 <style lang="less" scoped>

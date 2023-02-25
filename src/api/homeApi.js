@@ -1,13 +1,24 @@
 import request from './request'
-
-function homeGetInfo(data){
+export function getHotSuggestsApi() {
     return request({
-        method:get,
-        url:'/userInfo',
-        params:data
+        method: 'get',
+        url: '/home/hotSuggests',
     })
 }
 
-export default {
-    homeGetInfo
+export function getHomeCategories() {
+    return request({
+        method: 'get',
+        url: '/home/categories'
+    })
+}
+
+export function getHouseList(page) {
+    return request({
+        method: 'get',
+        url: "/home/houselist",
+        params: {
+            page
+        }
+    })
 }

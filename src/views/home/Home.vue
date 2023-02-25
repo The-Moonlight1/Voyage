@@ -6,42 +6,49 @@
         <div class="banner">
             <img src="../../assets/img/home/home-banner.png" alt="">
         </div>
-
-        <div class="location">
-            <div class="city" @click="selectCity">晋中</div>
-            <div class="myPosition" @click="getPosition">
-                <span class="text">我的位置</span>
-                <div class="icon">
-                    <icon name="aixin" size="18"></icon>
-                </div>
-            </div>
-        </div>
+        <home-search-box :hotSuggests="hotSuggests"></home-search-box>
+        <home-categories :categories="categories"></home-categories>
+        <search-bar v-show="isShowSearchBar"></search-bar>
+        <home-content :houseList="houseList"></home-content>
     </div>
 </template>
 
 <script setup> 
-import { useRouter } from 'vue-router'
+import HomeSearchBox from './cpns/HomeSearchBox.vue'
+import HomeCategories from './cpns/HomeCategories.vue';
+import HomeContent from './cpns/HomeContent.vue'
+import SearchBar from '@/components/SearchBar.vue'
+import { getHotSuggestsApi,getHomeCategories,getHouseList  } from '@/api/homeApi'
+import { ref,computed } from 'vue';
+import useScroll from "@/hooks/useScroll"
 
-const router = useRouter()
-// 选择旅行城市
-const selectCity = ()=>{
-    router.push('/city')
-}
+let hotSuggests = ref([])
 
-// 获取当前位置
-const getPosition = ()=>{
-    navigator.geolocation.getCurrentPosition(res=>{
-        console.log("获取成功",res);
-    },err=>{
-        console.log("获取失败",err);
-    })
-}
+// 网络请求，获取热门建议
+getHotSuggestsApi().then(res=>{
+    hotSuggests.value = res.data
+})
+
+// 获取 推荐类别
+let categories = ref([])
+getHomeCategories().then(res=>{
+    categories.value = res.data
+})
+
+// 使用 房间列表获取 hooks
+let houseList = ref([])
+let { scrollTop } =  useScroll(houseList,getHouseList)
+const isShowSearchBar = computed(() => {
+    return scrollTop.value >= 360
+})
 
 </script>
+
 
 <style lang="less" scoped>
 
 .home {
+    // overflow-y: auto;
     .nav-bar {
         display: flex;
         justify-content: center;
@@ -60,30 +67,5 @@ const getPosition = ()=>{
             width: 100%;
         }
     }
-    .location {
-        height: 44px;
-        display: flex;
-        align-items: center;
-        padding: 0 20px;
-
-        .city {
-            flex: 1;
-            font-size: 1.5rem;
-            color: rgb(157, 155, 155);
-        }
-        .myPosition {
-            width: 74px;
-            display: flex;
-            align-items: center;
-            .text {
-                color: #666;
-                font-size: 1.2rem;
-            }
-            .icon {
-                margin-left: 4px;
-            }
-        }
-    }
-
 }
 </style>

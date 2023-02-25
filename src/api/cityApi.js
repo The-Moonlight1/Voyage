@@ -2,11 +2,13 @@ import request from './request'
 
 // 城市
 function getCityAll() {
-    return request.get({
+    return request({
+      method:'get',
       url: "/city/all"
     })
+    // return request.get("/city/all")
 }
 
-export  {
+export default {
     getCityAll
 }
